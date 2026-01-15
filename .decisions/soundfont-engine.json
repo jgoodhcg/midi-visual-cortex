@@ -1,0 +1,78 @@
+{
+  "decision": {
+    "statement": "Which SoundFont synthesis engine should we use?",
+    "description": "Need to render MIDI notes as audio using SF2 SoundFont files. Must work on macOS and Linux. Priorities: reliable sound, simple builds, reasonable API for Bevy integration."
+  },
+  "options": [
+    {
+      "label": "rustysynth",
+      "description": "Pure Rust SF2 synthesizer. Newer library, simple API, no external dependencies."
+    },
+    {
+      "label": "oxisynth",
+      "description": "Pure Rust port of FluidSynth algorithms. More mature synthesis code, proven sound quality."
+    },
+    {
+      "label": "fluidsynth (FFI)",
+      "description": "Rust bindings to the C FluidSynth library. Industry standard, battle-tested, requires system library installation."
+    }
+  ],
+  "criteria": [
+    {
+      "name": "Pure Rust (no FFI)",
+      "cells": {
+        "rustysynth": { "text": "Yes - cargo build just works", "color": "green" },
+        "oxisynth": { "text": "Yes - cargo build just works", "color": "green" },
+        "fluidsynth (FFI)": { "text": "No - requires installing C library via brew/apt", "color": "yellow" }
+      }
+    },
+    {
+      "name": "SF2 Support",
+      "cells": {
+        "rustysynth": { "text": "Full SF2 support" },
+        "oxisynth": { "text": "Full SF2 support" },
+        "fluidsynth (FFI)": { "text": "Full SF2 support" }
+      }
+    },
+    {
+      "name": "SFZ Support",
+      "cells": {
+        "rustysynth": { "text": "No SFZ support" },
+        "oxisynth": { "text": "No SFZ support" },
+        "fluidsynth (FFI)": { "text": "No SFZ support" }
+      }
+    },
+    {
+      "name": "Sound Quality / Maturity",
+      "cells": {
+        "rustysynth": { "text": "Newer, less real-world testing", "color": "yellow" },
+        "oxisynth": { "text": "Ports FluidSynth's proven algorithms", "color": "green" },
+        "fluidsynth (FFI)": { "text": "Industry standard, used in countless apps", "color": "green" }
+      }
+    },
+    {
+      "name": "API Simplicity",
+      "cells": {
+        "rustysynth": { "text": "Simple, well-documented API" },
+        "oxisynth": { "text": "Reasonable API" },
+        "fluidsynth (FFI)": { "text": "Verbose C-style API through bindings", "color": "yellow" }
+      }
+    },
+    {
+      "name": "Maintenance Activity",
+      "cells": {
+        "rustysynth": { "text": "Active development" },
+        "oxisynth": { "text": "Moderate activity, stable" },
+        "fluidsynth (FFI)": { "text": "Very active (C lib)" }
+      }
+    },
+    {
+      "name": "Cross-platform Builds",
+      "cells": {
+        "rustysynth": { "text": "Trivial - pure Rust", "color": "green" },
+        "oxisynth": { "text": "Trivial - pure Rust", "color": "green" },
+        "fluidsynth (FFI)": { "text": "Requires CI setup for each platform", "color": "yellow" }
+      }
+    }
+  ]
+}
